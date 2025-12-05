@@ -1,0 +1,69 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>WDV221 Intro Javascript</title>
+</head>
+
+<body>
+<h2>WDV221 Intro Javascript</h2>
+<h3>Unit 7 - Comparisons and IF Statements - Compare Numbers Assignment </h3>
+<hr />
+<p>Please complete the following exercises on this page. When complete post this page to your  server. Make a link in your WDV221 homework  page for this assignment. </p>
+<p>Include a comment in each script with the exercise number and a description of what the script is supposed to do.</p>
+<p>Using Blackboard submit this  Assignment.</p>
+<hr />
+<form id="form1" name="form1" method="post" action="#">
+    <p>Value 1: 
+      <input type="text" name="value1" id="value1" />
+    </p>
+    <p>Value 2: 
+      <input type="text" name="value2" id="value2" />
+    </p>
+    <p>Result: <span id="resultSpan" class="result-box"></span></p>
+    
+    <p>
+      <input type="button" value="Compare Numbers" onclick="compareNumbers()" />
+    </p>
+    <p>
+      <input type="reset" name="Reset" id="button" value="Reset" onclick="resetForm()" />
+    </p>
+  </form>
+
+  <script>
+    /**
+     * task 1: Create function compareNumbers()
+     */
+    function compareNumbers() {
+        // 1. Get the values from the DOM
+        let val1 = document.getElementById("value1").value;
+        let val2 = document.getElementById("value2").value;
+
+        // 2. Convert to numbers
+        val1 = parseFloat(val1);
+        val2 = parseFloat(val2);
+
+        let resultLocation = document.getElementById("resultSpan");
+
+        // 3. task 2 & task 3: Compare and display largest or "Equal"
+        if (isNaN(val1) || isNaN(val2)) {
+            resultLocation.innerHTML = "Please enter valid numbers.";
+        } else if (val1 === val2) {
+            resultLocation.innerHTML = "Equal";
+        } else if (val1 > val2) {
+            resultLocation.innerHTML = val1;
+        } else {
+            resultLocation.innerHTML = val2;
+        }
+    }
+
+    /**
+     * task 5: Reset function
+     */
+    function resetForm() {
+        // Clear the result span
+        document.getElementById("resultSpan").innerHTML = "";
+    }
+  </script>
+</body>
+</html>
