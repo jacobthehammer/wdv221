@@ -1,0 +1,100 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>WDV221 Intro Javascript</title>
+
+<script>
+    
+    var numberToGuess = Math.floor(Math.random() * 10) + 1;
+    var guessCount = 0;
+
+    function highLowGame()
+    {
+        var inValue = parseInt( document.getElementById("inputGuess").value );  //get value from the form
+        var resultDisplay = document.getElementById("highLowResult");
+        var countDisplay = document.getElementById("guessCountDisplay");
+        
+        guessCount++;
+
+        countDisplay.innerHTML = "Guesses: " + guessCount;
+
+        if(guessCount > 4) {
+            countDisplay.style.backgroundColor = "lightcoral";
+        }
+
+        if (inValue == numberToGuess)
+        {
+            resultDisplay.innerHTML = "Congratulations!  That is the number.";
+            resultDisplay.style.backgroundColor = "lightblue";
+        }
+        else
+        {
+            if(inValue < numberToGuess) {
+                resultDisplay.innerHTML = "Too Low";
+            } else {
+                resultDisplay.innerHTML = "Too High";
+            }
+        }
+    }
+
+    function resetHighLowGame()
+    {
+        document.getElementById("highLowForm").reset();
+        document.getElementById("highLowResult").innerHTML = "";
+
+        document.getElementById("highLowResult").style.backgroundColor = "";
+        
+        guessCount = 0;
+        var countDisplay = document.getElementById("guessCountDisplay");
+        countDisplay.innerHTML = "";
+        countDisplay.style.backgroundColor = "";
+
+        numberToGuess = Math.floor(Math.random() * 10) + 1;
+    }
+
+
+</script>
+
+
+</head>
+
+<body>
+<h1>WDV221 Intro Javascript</h1>
+
+    <h2>Skill Test - Finish High-Low Game</h2>
+
+    <form name="highLowForm" id="highLowForm" method="post" action="">
+    <fieldset>
+        <legend>High Low Game</legend>
+        <p>
+            <label>Input a number from 1-10
+                <input type="text" name="inputGuess" id="inputGuess">
+            </label>
+        </p>
+      <p>Result! <span id="highLowResult"></span></p>
+      
+      <p><span id="guessCountDisplay"></span></p>
+
+      <p>
+        <input type="button" name="makeGuess" id="makeGuess" value="Make a Guess">
+        <input type="button" name="resetHighLowGame" id="resetHighLowGame" value="Reset">
+      </p>
+      <script>
+            document.getElementById("makeGuess").addEventListener("click",highLowGame); //assign click event to form button 
+            document.getElementById("resetHighLowGame").addEventListener("click",resetHighLowGame); 
+      </script>
+    </fieldset>
+</form>
+<h3>Instructions:</h3>
+<p>1. Complete the highLowGame function to play the game. </p>
+<p>2. Change the function to include a guess counter. Display the number of guesses each time.</p>
+<p>3. Change the background color of the Result area to light blue for a correct answer. </p>
+<p>4. If the users takes more than 4 guesses change the background of the guess counter display to light red.</p>
+<p>5. Change the reset function to reset the presentation changes.</p>
+<p>&nbsp;</p>
+    
+
+
+</body>
+</html>
