@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<head>
+	
+</head>
+<html>
+<body >
+
+
+<h1>Disco Elysium Dice Roll</h1>
+
+<img src="imgs/1.PNG" id="dice1" />
+<img src="imgs/1.PNG" id="dice2"/>
+
+<p id="diceRollDisplay"></p>
+<span id="diceRollDisplaySpan"> </span>
+
+<br><br>
+
+<label for="skillLevel">Skill Level:</label>
+<input type="number" id="skillLevel" value="0"/>
+<br>
+<label for="difficultyClass">Difficulty Class (DC):</label>
+<input type="number" id="difficultyClass" value="10"/>
+<br><br>
+<input type="button" value="Roll" onclick="Roll();" />
+
+
+<script>
+
+function getRndInteger(min, max) {
+  return Math.floor(Math.random() * (max - min + 1) ) + min;
+}
+
+function Roll()
+{
+	var skillLevel = parseInt(document.getElementById("skillLevel").value);
+    var difficultyClass = parseInt(document.getElementById("difficultyClass").value);
+    
+    // Basic validation
+    if (isNaN(skillLevel) || isNaN(difficultyClass)) {
+        alert("Please enter valid numbers for Skill Level and DC.");
+        return;
+    }
+
+	var dice1Roll = getRndInteger(1,6);
+	var dice2Roll = getRndInteger(1,6);	
+	document.getElementById("dice1").src = getDiceImage(dice1Roll);
+	document.getElementById("dice2").src = getDiceImage(dice2Roll);
+	
+    var rollSum = dice1Roll + dice2Roll;
+	var total = rollSum + skillLevel;
+    
+    var resultHtml = "";
+    var statusHtml = "";
+
+    // Critical Success: Double 6s
+    if (dice1Roll === 6 && dice2Roll === 6) {
+        statusHtml = "<span style='color:green; font-weight:bold'>CRITICAL SUCCESS!</span> (Double 6s)";
+        resultHtml = "Rolled " + rollSum + " (Natural 12) + " + skillLevel + " (Skill) = " + total;
+    } 
+    // Critical Failure: Double 1s
+    else if (dice1Roll === 1 && dice2Roll === 1) {
+        statusHtml = "<span style='color:red; font-weight:bold'>CRITICAL FAILURE!</span> (Double 1s)";
+        resultHtml = "Rolled " + rollSum + " (Natural 2) + " + skillLevel + " (Skill) = " + total;
+    }
+    // Normal Check
+    else {
+        resultHtml = "Rolled " + rollSum + " + " + skillLevel + " (Skill) = " + total + " vs DC " + difficultyClass;
+        
+        if (total >= difficultyClass) {
+            statusHtml = "<span style='color:green'>SUCCESS</span>";
+        } else {
+            statusHtml = "<span style='color:red'>FAILURE</span>";
+        }
+    }
+	
+	document.getElementById("diceRollDisplay").innerHTML = resultHtml;
+    document.getElementById("diceRollDisplaySpan").innerHTML = statusHtml;
+}
+
+function getDiceImage(inDiceValue)
+{
+	return "imgs/"+ inDiceValue +".PNG";
+}
+
+</script>	
+
+
+
+
+	
+
+
+</body>
+</html>
